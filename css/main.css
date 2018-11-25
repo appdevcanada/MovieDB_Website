@@ -1,5 +1,83 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
+@import "https://fonts.googleapis.com/css?family=Roboto:400,700";
+
+
+.overlay{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(0,0,0,0.8);
+    cursor: pointer;
+}
+ 
+.modal {
+    position: fixed;
+    width: 500px;
+    height: 280px;
+    z-index: 200;   
+    top: calc((100% - 280px)/2);
+    left: calc((100% - 500px)/2);
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    color: #555;
+    background-color: #eee;
+}
+
+
+/* use these class names to show or hide the overlay and modal window */
+.show{
+    display: block;
+}
+.hide {
+    display: none;
+}
+.off{
+    transform: translateY(-400%);
+}
+.on{
+    transform: translateY(0);
+}
+
+.cancelButton,
+.saveButton{
+    width: 120px;
+    position: absolute;
+    border: none;
+    background-color: orange;
+    color: white;
+    cursor: pointer;
+    padding: 0.25rem 2rem;
+    font-size: 1rem;
+}
+
+.saveButton{
+    bottom: 1rem;
+    right: 4rem;
+}
+
+.cancelButton{
+    bottom: 1rem;
+    left: 4rem;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color:orange;
+    color: white;
+    text-align: center;
+}
+
+.modal-radio{
+    text-align: center;
+    margin-top: 4rem;
+}
+
+
+
 /*************************************************
             DEFAULTS
 *************************************************/

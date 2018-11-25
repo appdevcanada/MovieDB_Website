@@ -15,6 +15,23 @@ function init() {
 function addEventListeners() {
     let searchButton = document.querySelector(".searchButtonDiv");
     searchButton.addEventListener("click", startSearch)
+    document.querySelector("#modalButton").addEventListener("click", showOverlay);
+    document.querySelector(".cancelButton").addEventListener("click", hideOverlay);
+ //   document.querySelector(".overlay").addEventListener("click", hideOverlay);
+    
+    document.querySelector(".saveButton").addEventListener("click", function(e){
+        let cheeseList = document.getElementsByName("cheese");
+        let cheeseType = null;
+        for (let i = 0; i < cheeseList.length; i++) {
+            if (cheeseList[i].checked) {
+                cheeseType = cheeseList[i].value;
+                break;
+            }
+        }
+        alert(cheeseType);
+        console.log("You picked " + cheeseType)
+        hideOverlay(e);
+    });
 }
 
 function getLSData() {
@@ -67,4 +84,36 @@ function getSearchResults() {
         .catch(function (error) {
             alert(error);
         })
+}
+
+ 
+function showOverlay(e) {
+    e.preventDefault();
+    let overlay = document.querySelector(".overlay");
+    overlay.classList.remove("hide");
+    overlay.classList.add("show");
+    showModal(e);
+}
+
+function showModal(e) {
+    e.preventDefault();
+    let modal = document.querySelector(".modal");
+    modal.classList.remove("off");
+    modal.classList.add("on");
+}
+
+function hideOverlay(e) {
+    e.preventDefault();
+    e.stopPropagation(); // don't allow clicks to pass through
+    let overlay = document.querySelector(".overlay");
+    overlay.classList.remove("show");
+    overlay.classList.add("hide");
+    hideModal(e);
+}
+
+function hideModal(e) {
+    e.preventDefault();
+    let modal = document.querySelector(".modal");
+    modal.classList.remove("on");
+    modal.classList.add("off");
 }
