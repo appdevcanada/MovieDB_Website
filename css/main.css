@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+/*************************************************
+            DEFAULTS
+*************************************************/
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    align-content: center;
+    text-align: center;
+}
+
+:root {
+    --bd-top: 1rem solid hsl(142, 70%, 40%);
+    --b-bdr: 1px solid hsl(142, 70%, 40%);
+    --h-txt-sdw: 2px 2px 2px hsl(1, 0%, 20%);
+    --h-clr: hsl(142, 70%, 40%);
+    --h-bg-clr: hsl(1, 0%, 90%);
+    --b-bg-clr: hsl(1, 0%, 50%);
+    --b-h-bg-clr: hsl(142, 70%, 30%);
+    --b-h-box-sdw: 0 0 10px hsl(206, 69%, 47%);
+    --i-clr: hsl(1, 0%, 30%);
+    --i-box-sdw: 2px 2px 3px 1px hsl(1, 0%, 50%);
+}
+
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 16px;
+    font-family: Ubuntu, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+}
+
+button,
+input {
+    font-family: Ubuntu, Helvetica, Arial, sans-serif;
+    padding: 0.4rem;
+    margin-top: 20px;
+}
+
+#home {
+    display: block;
+}
+
+#list {
+    display: none;
+}
+
+.mainList2 {
+    width: 60%;
+}
+
+.main {
+    min-height: 400px;
+}
+
+#numbers {
+    clear: both;
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    justify-content: space-evenly;
+    justify-content: center;
+}
+
+ul {
+    clear: both;
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    justify-content: space-evenly;
+}
+
+li {
+    list-style: none;
+/*
+    background-image: url("../img/ball.png");
+*/
+    background-repeat: no-repeat;
+    background-size: 50px;
+    background-position: center;
+    font-weight: bolder;
+    padding: 2rem 1.5rem 2rem 1.5rem;
+    font-size: 1.1rem;
+}
+
+/*************************************************
+            HEADER
+*************************************************/
+header {
+    padding: 1rem 2rem;
+/*
+    background-image: url("../img/ball.png");
+*/
+    background-size: contain;
+    border-top: var(--bd-top);
+}
+
+header > h1 > span {
+    font-size: 2.8rem;
+    text-shadow: var(--h-txt-sdw);
+    color: var(--h-clr);
+    background-color: var(--h-bg-clr);
+}
+
+
+/*************************************************
+            MAIN CONTENT
+*************************************************/
+.num_list {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+section > p {
+    padding: 0 0 1rem 0;
+}
+
+button {
+    color: var(--h-bg-clr);
+    background-color: var(--b-bg-clr);
+    font-size: 1.1rem;
+    border: var(--b-bdr);
+    border-radius: 2px;
+    -webkit-transition-duration: 1s;
+    transition-duration: 1s;
+}
+
+button:hover {
+    background-color: var(--b-h-bg-clr);
+    box-shadow: var(--b-h-box-sdw);
+    cursor: pointer;
+}
+
+#max,
+#digits {
+    font-size: 1rem;
+    color: var(--i-clr);
+    box-shadow: var(--i-box-sdw);
+}
+
+.results,
+.main {
+    min-height: calc(100vh - 180px);
+}
+
+
+/*************************************************
+            FOOTER
+*************************************************/
+footer {
+    background-image: linear-gradient(hsl(1, 0%, 60%), hsl(1, 0%, 95%), hsl(1, 0%, 60%));
+    font-size: 1.2rem;
+    padding: 1rem;
+    width: 100%;
+    height: 66px;
+}
+
+
+/*************************************************
+            MEDIA QUERIES for layout
+*************************************************/
+@media (max-width: 599px) {
+
+    header > h1 > span {
+        font-size: 2.8rem;
+    }
+
+    li {
+        background-size: 50px;
+        padding: 2rem 1.4rem 2rem 1.4rem;
+        font-size: 1.1rem;
+    }
+
+    label,
+    span {
+        font-size: 1.1rem;
+    }
+
+    .results,
+    .main {
+        min-height: calc(100vh - 180px);
+    }
+
+    footer {
+        font-size: 1.2rem;
+    }
+}
+
+@media (min-width: 600px) and (max-width:999px) {
+
+    header > h1 > span {
+        font-size: 3rem;
+    }
+
+    li {
+        background-size: 75px;
+        padding: 2rem 2rem 2rem 2rem;
+        font-size: 2rem;
+    }
+
+    button,
+    label,
+    span {
+        font-size: 1.2rem;
+    }
+
+    .results,
+    .main {
+        min-height: calc(100vh - 184px);
+    }
+
+    footer {
+        font-size: 1.3rem;
+    }
+}
+
+@media (min-width: 1000px) {
+
+    header > h1 > span {
+        font-size: 3.2rem;
+    }
+
+    li {
+        background-size: 100px;
+        padding: 2rem 3rem 2rem 3rem;
+        font-size: 2.5rem;
+    }
+
+    .mainList2 {
+        width: 50%;
+    }
+
+    button,
+    label,
+    span {
+        font-size: 1.3rem;
+    }
+
+    .results,
+    .main {
+        min-height: calc(100vh - 188px);
+    }
+
+    footer {
+        font-size: 1.4rem;
+    }
+}
