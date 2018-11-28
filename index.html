@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Movie Recommendations</title>
+    <title>Movie Recommendations DataBase</title>
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="css/main.css" />
 </head>
 
 <body>
+    <div class="mini-modal on">
+        <!--                <img id="back-button" alt="Back Button" title="Back" />-->
+        <div class="searchButtonDiv">
+            <input type="text" id="search-input" placeholder="Search here..." />
+            <img id="search-button" alt="Search" title="Search" data-src="icon/svg/smart/magnifying-glass.svg" class="iconic iconic-md" />
+        </div>
+        <div class="settingButtonDiv">
+            <img id="modalButton" alt="Settings" title="Settings" data-src="icon/svg/smart/settings.svg" class="iconic iconic-md" />
+<!--
+<button id="modalButton">Settings</button>-->
+        </div>
+    </div>
     <main>
-        <header>
-            <img id="back-button" alt="Back Button" title="Back" />
-            <div class="searchButtonDiv">
-                <img id="search-button" alt="Search" title="Search" data-src="icons/svg/smart/magnifying-glass.svg" class="iconic iconic-md" />
-            </div>
-            <input type="text" id="search-input" placeholder="search here" />
-        </header>
+        <div class="inital-content" id="init-ctt">
+            <p></p>
+        </div>
 
         <div class="page" id="search-results">
             <section class="title"></section>
@@ -26,58 +35,34 @@
             <section class="title"></section>
             <section class="content"></section>
         </div>
+
+        <div class="overlay hide">&nbsp;</div>
+
+
+        <div class="modal off">
+            <div class="modal-header">
+                <h2>Choose your Search</h2>
+            </div>
+            <div class="modal-radio">
+                <input type="radio" name="settings" value="movie" id="movie" checked>
+                <label for="Movie">Movie</label><br>
+
+                <input type="radio" name="settings" value="tv" id="tv">
+                <label for="TV">TV</label>
+            </div>
+            <button class="cancelButton">Cancel</button>
+            <button class="saveButton">Save</button>
+
+        </div>
+
     </main>
-
-
-    <div class="attribution">
-
-    </div>
-
+    <footer>
+        <p>&copy;
+            <time datetime="2018">2018</time> Luis Souza - The Movie DataBase</p>
+    </footer>
     <script src="js/iconic.min.js"></script>
     <script src="js/key.js"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>
-
-
-<body>
-    <main>
-
-        <button id="modalButton">Show Modal</button>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis eaque tenetur corporis ratione cum eum, molestiae odio reprehenderit, similique placeat veniam perspiciatis in blanditiis? Deserunt nesciunt eveniet numquam esse voluptatum distinctio tempore adipisci molestiae optio natus dolor sit earum, deleniti quisquam magni rerum totam repellendus quasi incidunt vero eos cupiditate, blanditiis accusantium quas. Ullam odio, impedit dolorem ea est minima.</p>
-        <p>Voluptatem expedita temporibus ea quas perferendis sunt distinctio blanditiis maxime, reiciendis! Animi quam, molestias nisi illo eveniet quo dolore eum, sequi itaque repellat enim cupiditate dicta quae explicabo assumenda consequatur doloribus obcaecati ipsa mollitia facere aut quod. Labore temporibus modi mollitia, cum, obcaecati minus quae itaque laborum nulla quisquam eaque nisi ut porro repudiandae natus ducimus sint nihil, corporis tempore?</p>
-        <p>Ipsam harum repellat cupiditate. Blanditiis perferendis voluptatibus sapiente quam veniam iusto animi qui quidem minus eius, dolorem officiis ex natus obcaecati vero unde minima, impedit similique! Totam quisquam asperiores nihil dicta laudantium ea dolorem, nulla a iusto ipsa tempore reiciendis optio non aliquid nam velit nobis fugiat officiis eum quos. Provident sequi, distinctio placeat eos eligendi, non eum accusamus delectus.</p>
-        <p>Facere eligendi sed reprehenderit minima dignissimos doloribus minus iusto, ipsa iure non, nulla, sunt autem odio nostrum alias at aperiam ipsum dolorum! In ex dolore aliquam, dolores ea iusto maiores. Vitae ut exercitationem quos id ducimus, neque distinctio. Ab deleniti cum iusto praesentium eius asperiores recusandae a illo, doloremque quisquam dolores commodi blanditiis obcaecati dolorum sint laudantium omnis qui est.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veritatis eaque tenetur corporis ratione cum eum, molestiae odio reprehenderit, similique placeat veniam perspiciatis in blanditiis? Deserunt nesciunt eveniet numquam esse voluptatum distinctio tempore adipisci molestiae optio natus dolor sit earum, deleniti quisquam magni rerum totam repellendus quasi incidunt vero eos cupiditate, blanditiis accusantium quas. Ullam odio, impedit dolorem ea est minima.</p>
-        <p>Voluptatem expedita temporibus ea quas perferendis sunt distinctio blanditiis maxime, reiciendis! Animi quam, molestias nisi illo eveniet quo dolore eum, sequi itaque repellat enim cupiditate dicta quae explicabo assumenda consequatur doloribus obcaecati ipsa mollitia facere aut quod. Labore temporibus modi mollitia, cum, obcaecati minus quae itaque laborum nulla quisquam eaque nisi ut porro repudiandae natus ducimus sint nihil, corporis tempore?</p>
-        <p>Ipsam harum repellat cupiditate. Blanditiis perferendis voluptatibus sapiente quam veniam iusto animi qui quidem minus eius, dolorem officiis ex natus obcaecati vero unde minima, impedit similique! Totam quisquam asperiores nihil dicta laudantium ea dolorem, nulla a iusto ipsa tempore reiciendis optio non aliquid nam velit nobis fugiat officiis eum quos. Provident sequi, distinctio placeat eos eligendi, non eum accusamus delectus.</p>
-        <p>Facere eligendi sed reprehenderit minima dignissimos doloribus minus iusto, ipsa iure non, nulla, sunt autem odio nostrum alias at aperiam ipsum dolorum! In ex dolore aliquam, dolores ea iusto maiores. Vitae ut exercitationem quos id ducimus, neque distinctio. Ab deleniti cum iusto praesentium eius asperiores recusandae a illo, doloremque quisquam dolores commodi blanditiis obcaecati dolorum sint laudantium omnis qui est.</p>
-
-        <footer>
-            <p>&copy;
-                <time datetime="2018">2018</time> Iron Termite</p>
-        </footer>
-    </main>
-    <div class="overlay hide">&nbsp;</div>
-
-    <div class="modal off">
-        <div class="modal-header">
-            <h2>Choose your Cheese</h2>
-        </div>
-        <div class="modal-radio">       
-            <input type="radio" name="cheese" value="blue" id="blue">
-            <label for="blue">Blue</label>
-            
-            <input type="radio" name="cheese" value="cheddar" id="cheddar" checked>
-            <label for="cheddar">Cheddar</label>
-
-            <input type="radio" name="cheese" value="swiss" id="swiss">
-            <label for="swiss">Swiss</label>
-        </div>
-        <button class="cancelButton">Cancel</button>
-        <button class="saveButton">Save</button>
-
-    </div>
-
-    <script src="js/main.js"></script>
-</body>

@@ -1,92 +1,19 @@
-@import url('https://fonts.googleapis.com/css?family=Ubuntu');
-
-@import "https://fonts.googleapis.com/css?family=Roboto:400,700";
-
-
-.overlay{
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    background: rgba(0,0,0,0.8);
-    cursor: pointer;
-}
- 
-.modal {
-    position: fixed;
-    width: 500px;
-    height: 280px;
-    z-index: 200;   
-    top: calc((100% - 280px)/2);
-    left: calc((100% - 500px)/2);
-    font-family: Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    color: #555;
-    background-color: #eee;
-}
-
-
-/* use these class names to show or hide the overlay and modal window */
-.show{
-    display: block;
-}
-.hide {
-    display: none;
-}
-.off{
-    transform: translateY(-400%);
-}
-.on{
-    transform: translateY(0);
-}
-
-.cancelButton,
-.saveButton{
-    width: 120px;
-    position: absolute;
-    border: none;
-    background-color: orange;
-    color: white;
-    cursor: pointer;
-    padding: 0.25rem 2rem;
-    font-size: 1rem;
-}
-
-.saveButton{
-    bottom: 1rem;
-    right: 4rem;
-}
-
-.cancelButton{
-    bottom: 1rem;
-    left: 4rem;
-}
-
-.modal-header {
-    padding: 2px 16px;
-    background-color:orange;
-    color: white;
-    text-align: center;
-}
-
-.modal-radio{
-    text-align: center;
-    margin-top: 4rem;
-}
-
-
+@import url("https://fonts.googleapis.com/css?family=Ubuntu:400,700");
+/*@include "_variables.css"*/
 
 /*************************************************
-            DEFAULTS
+                DEFAULTS
 *************************************************/
-* {
+*,
+html {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     align-content: center;
     text-align: center;
+    font-family: Ubuntu, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5rem;
 }
 
 :root {
@@ -107,17 +34,117 @@
     box-sizing: inherit;
 }
 
-html {
-    font-size: 16px;
-    font-family: Ubuntu, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
+/*************************************************
+                OVERLAY / MODALS
+*************************************************/
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: hsla(0, 0%, 0%, 0.8);
+    cursor: pointer;
 }
 
+.modal {
+    position: fixed;
+    width: 500px;
+    height: 280px;
+    z-index: 200;
+    top: calc((100% - 280px)/2);
+    left: calc((100% - 500px)/2);
+    line-height: 1.5rem;
+    color: hsl(0, 0%, 33%);
+    background-color: hsl(0, 0%, 93%);
+}
+
+.mini-modal {
+    position: fixed;
+    width: 100%;
+    height: 100px;
+    z-index: 50;
+    top: 0;
+    left: 0;
+    line-height: 1.5rem;
+    color: hsl(135, 94%, 90%);
+    background-color: hsla(150, 100%, 10%, 0.8);
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.off {
+    transform: translateY(-400%);
+}
+
+.on {
+    transform: translateY(0);
+}
+
+.cancelButton,
+.saveButton {
+    width: 120px;
+    position: absolute;
+    border: none;
+    background-color: hsl(150, 100%, 10%);
+    color: hsl(0, 100%, 100%);
+    cursor: pointer;
+    padding: 0.25rem 2rem;
+    font-size: 1.2rem;
+}
+
+.saveButton {
+    bottom: 1rem;
+    right: 4rem;
+}
+
+.cancelButton {
+    bottom: 1rem;
+    left: 4rem;
+}
+
+.modal-header {
+    padding: 1rem;
+    font-size: 1.5rem;
+    background-color: hsl(150, 100%, 30%);
+    color: hsl(0, 100%, 100%);
+    text-align: center;
+}
+
+.modal-header h2 {
+    font-size: 1.2rem;
+}
+
+.modal-radio {
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.modal-radio label {
+    font-size: 1.2rem;
+}
+
+/*************************************************
+                    GENERAL
+*************************************************/
+
+.iconic * {
+    fill: white;
+    stroke: white;
+}
 button,
 input {
     font-family: Ubuntu, Helvetica, Arial, sans-serif;
     padding: 0.4rem;
     margin-top: 20px;
+    font-size: 0.7rem;
 }
 
 #home {
@@ -132,8 +159,8 @@ input {
     width: 60%;
 }
 
-.main {
-    min-height: 400px;
+main {
+    min-height: 950px;
 }
 
 #numbers {
@@ -155,9 +182,6 @@ ul {
 
 li {
     list-style: none;
-/*
-    background-image: url("../img/ball.png");
-*/
     background-repeat: no-repeat;
     background-size: 50px;
     background-position: center;
@@ -171,11 +195,7 @@ li {
 *************************************************/
 header {
     padding: 1rem 2rem;
-/*
-    background-image: url("../img/ball.png");
-*/
     background-size: contain;
-    border-top: var(--bd-top);
 }
 
 header > h1 > span {
@@ -222,21 +242,17 @@ button:hover {
     box-shadow: var(--i-box-sdw);
 }
 
-.results,
-.main {
-    min-height: calc(100vh - 180px);
-}
-
 
 /*************************************************
             FOOTER
 *************************************************/
 footer {
-    background-image: linear-gradient(hsl(1, 0%, 60%), hsl(1, 0%, 95%), hsl(1, 0%, 60%));
+    background-color: hsl(1, 0%, 50%);
+    color: hsl(0, 100%, 100%);
     font-size: 1.2rem;
     padding: 1rem;
     width: 100%;
-    height: 66px;
+    height: 70px;
 }
 
 
@@ -261,8 +277,8 @@ footer {
     }
 
     .results,
-    .main {
-        min-height: calc(100vh - 180px);
+    main {
+        min-height: calc(100vh - 70px);
     }
 
     footer {
@@ -289,8 +305,8 @@ footer {
     }
 
     .results,
-    .main {
-        min-height: calc(100vh - 184px);
+    main {
+        min-height: calc(100vh - 70px);
     }
 
     footer {
@@ -320,12 +336,14 @@ footer {
         font-size: 1.3rem;
     }
 
-    .results,
-    .main {
+    .results {
         min-height: calc(100vh - 188px);
     }
 
     footer {
         font-size: 1.4rem;
+    }
+    main {
+        min-height: calc(100vh - 70px);
     }
 }

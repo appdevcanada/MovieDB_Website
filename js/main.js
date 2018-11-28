@@ -4,6 +4,7 @@ const movieDBURL = "https:/api.themoviedb.org/3/";
 let imageURL = null;
 let imageSizes = {};
 let searchString = "";
+let settingType = null;
 
 document.addEventListener("DOMContentLoaded", init);
 
@@ -14,22 +15,21 @@ function init() {
 
 function addEventListeners() {
     let searchButton = document.querySelector(".searchButtonDiv");
-    searchButton.addEventListener("click", startSearch)
-    document.querySelector("#modalButton").addEventListener("click", showOverlay);
-    document.querySelector(".cancelButton").addEventListener("click", hideOverlay);
- //   document.querySelector(".overlay").addEventListener("click", hideOverlay);
-    
+    searchButton.addEventListener("click", startSearch);
+    let settingButton = document.querySelector(".settingButtonDiv");
+    settingButton.addEventListener("click", showOverlay);
+//    document.querySelector("#modalButton").addEventListener("click", showOverlay);
+    document.querySelector(".cancelButton").addEventListener("click", hideOverlay);    
     document.querySelector(".saveButton").addEventListener("click", function(e){
-        let cheeseList = document.getElementsByName("cheese");
-        let cheeseType = null;
-        for (let i = 0; i < cheeseList.length; i++) {
-            if (cheeseList[i].checked) {
-                cheeseType = cheeseList[i].value;
+        let setList = document.getElementsByName("settings");
+        let setType = null;
+        for (let i = 0; i < setList.length; i++) {
+            if (setList[i].checked) {
+                setType = setList[i].value;
+                settingType = setType;
                 break;
             }
         }
-        alert(cheeseType);
-        console.log("You picked " + cheeseType)
         hideOverlay(e);
     });
 }
@@ -46,7 +46,7 @@ function getLSData() {
 
 function getPosterSizesAndURL() {
     let url = `${movieDBURL}configuration?api_key=${APIKEY}`;
-    console.log(url);
+
     fetch(url)
         .then(function (response) {
             return response.json();
@@ -65,7 +65,7 @@ function getPosterSizesAndURL() {
 function startSearch() {
     searchString = document.getElementById("search-input");
     if (!searchString.value) {
-        alert("type something");
+        alert("Please type something!");
         searchString.focus();
         return;
     }
@@ -73,7 +73,7 @@ function startSearch() {
 }
 
 function getSearchResults() {
-    let url = `${movieDBURL}search/movie?api_key=${APIKEY}&query=${searchString.value}`;
+    let url = `${movieDBURL}search/${settingType}?api_key=${APIKEY}&query=${searchString.value}`;
     fetch(url)
         .then(function (response) {
             return response.json();
