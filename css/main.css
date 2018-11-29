@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Ubuntu:400,700");
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+
 /*@include "_variables.css"*/
 
 /*************************************************
@@ -37,6 +39,11 @@ html {
 /*************************************************
                 OVERLAY / MODALS
 *************************************************/
+#modalButton {
+    position: relative;
+    left: 45%;
+}
+
 .overlay {
     position: fixed;
     top: 0;
@@ -48,11 +55,11 @@ html {
     cursor: pointer;
 }
 
-.modal {
+.modalw {
     position: fixed;
     width: 500px;
     height: 280px;
-    z-index: 200;
+    z-index: 2000;
     top: calc((100% - 280px)/2);
     left: calc((100% - 500px)/2);
     line-height: 1.5rem;
@@ -136,15 +143,69 @@ html {
 *************************************************/
 
 .iconic * {
-    fill: white;
-    stroke: white;
+    fill: hsl(1, 0%, 90%);
+    stroke: hsl(1, 0%, 90%);
 }
+
 button,
 input {
     font-family: Ubuntu, Helvetica, Arial, sans-serif;
     padding: 0.4rem;
     margin-top: 20px;
-    font-size: 0.7rem;
+    font-size: 1rem;
+}
+
+.flexg {
+    display: grid;
+    grid-template-areas:
+        "l s s s c";
+    grid-template-columns: repeat(5, 1fr);
+
+}
+
+.logoDB {
+    margin-left: 10px;
+    margin-top: 6px;
+    grid-area: l;
+    justify-self: start;
+}
+
+#logoMD {
+    width: 80px;
+    height: 87px;
+}
+
+.searchButtonDiv {
+    grid-area: s;
+    position: relative;
+    color: hsl(1, 0%, 60%);
+    font-size: 16px;
+}
+
+.searchButtonDiv input {
+    margin-top: 34px;
+    width: 90%;
+    height: 32px;
+    text-indent: 32px;
+    text-align: left;
+
+    background: #fcfcfc;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
+}
+
+.searchButtonDiv .fa-search {
+    position: relative;
+    top: 2px;
+    left: 30px;
+}
+
+.settingButtonDiv {
+    margin-top: 34px;
+    margin-right: 20px;
+    grid-area: c;
+    justify-self: end;
 }
 
 #home {
@@ -247,12 +308,16 @@ button:hover {
             FOOTER
 *************************************************/
 footer {
-    background-color: hsl(1, 0%, 50%);
+    background-color: hsl(1, 0%, 30%);
     color: hsl(0, 100%, 100%);
-    font-size: 1.2rem;
-    padding: 1rem;
     width: 100%;
-    height: 70px;
+    height: 76px;
+}
+
+#logoFooter {
+    margin-top: 10px;
+    width: 110px;
+    height: 50px;
 }
 
 
@@ -278,11 +343,15 @@ footer {
 
     .results,
     main {
-        min-height: calc(100vh - 70px);
+        min-height: calc(100vh - 76px);
     }
 
     footer {
         font-size: 1.2rem;
+    }
+
+    .logoDB {
+        margin-left: 10px;
     }
 }
 
@@ -306,7 +375,7 @@ footer {
 
     .results,
     main {
-        min-height: calc(100vh - 70px);
+        min-height: calc(100vh - 76px);
     }
 
     footer {
@@ -343,7 +412,8 @@ footer {
     footer {
         font-size: 1.4rem;
     }
+
     main {
-        min-height: calc(100vh - 70px);
+        min-height: calc(100vh - 76px);
     }
 }
