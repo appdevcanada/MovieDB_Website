@@ -7,6 +7,7 @@ let searchString = "";
 let settingType = null;
 let indexOfType = 0;
 let typeKey = "type";
+let setKey = "set";
 let dateKey = "date";
 let timeStaled = 10000; //3600000;
 
@@ -15,6 +16,7 @@ document.addEventListener("DOMContentLoaded", init);
 function init() {
     document.getElementById("search-input").focus();
     addEventListeners();
+    getPosterSizesAndURL();
     getLSData();
 }
 
@@ -46,6 +48,7 @@ function getLSData() {
     if (localStorage.getItem(typeKey)) {
         let selIndex = document.getElementsByName("settings");
         indexOfType = JSON.parse(localStorage.getItem(typeKey));
+        settingType = JSON.parse(localStorage.getItem(setKey));
 
         selIndex[indexOfType].checked = true;
 
@@ -81,7 +84,8 @@ function getPosterSizesAndURL() {
             return response.json();
         })
         .then(function (data) {
-            imageURL = data.images.secure_base_url;
+console.log(data);
+            imageURL = data.images.base_url;
             imageSizes = data.images.poster_sizes;
             console.log(imageSizes);
         })
@@ -92,9 +96,11 @@ function getPosterSizesAndURL() {
 
 function saveLSData() {
     localStorage.setItem(typeKey, JSON.stringify(indexOfType));
-    let now = new Date();
+    localStorage.setItem(setKey, JSON.stringify(settingType));
 
+    let now = new Date();
     localStorage.setItem(dateKey, JSON.stringify(now));
+    document.getElementById("search-input").focus();
 }
 
 function startSearch() {
@@ -114,11 +120,38 @@ function getSearchResults() {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
+//            console.log(data);
+//            imageURL = data.images.base_url;
+//            imageSizes = data.images.poster_sizes;
+            fillDataCards(data);
         })
         .catch(function (error) {
             alert(error);
         })
+}
+
+//             <section class="title">
+//               <div class="image"><img src="https://image.tmdb.org/t/p/w200/kqjL17yufvn9OVLyXYpvtyrFfak.jpg" /></div>
+//                <div class="nameTitle">MAD MAX</div>
+//                <div class="date">2018-11-28</div>
+//                <div class="txtTitle"><p>Lorem</p></div>
+
+function fillDataCards(data) {
+    let dataCard = document.querySelector("#search-results");
+//    dataCard.innerHTML = "";
+    for (let item in data.results) {
+        let sec = document.createElement("section");
+        sec.setAttribute("class", "title");
+        sec.append;
+        let divImg = document.createElement("div");
+        divImg.setAttribute("class", "image");
+        let img = document.createElement("img");
+        img.setAttribute("src", imageURL + "w200/" + data.results[item].poster_path);
+        dataCard.appendChild(img);
+        dataCard.appendChild(divImg);
+        //        sec.innerHTML = data.results[item];
+        dataCard.appendChild(sec);
+    }
 }
 
 function showOverlay(e) {
