@@ -70,6 +70,7 @@ function getLSData() {
 
 function getPosterSizesAndURL() {
     let url = `${movieDBURL}configuration?api_key=${APIKEY}`;
+console.log(`${movieDBURL}configuration?api_key=${APIKEY}`);
 
     fetch(url)
         .then(function (response) {
