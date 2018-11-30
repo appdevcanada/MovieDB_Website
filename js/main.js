@@ -107,7 +107,11 @@ function startSearch() {
         searchString.focus();
         return;
     }
-    getSearchResults();
+    if (settingType != null) {
+        getSearchResults();
+    } else {
+        showOverlay();
+    }
 }
 
 function getSearchResults() {
