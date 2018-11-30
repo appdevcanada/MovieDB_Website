@@ -233,7 +233,10 @@ function fillDataCardsTV(data) {
 ***********************************/
 
 function showOverlay(e) {
-    e.preventDefault();
+    console.log(settingType);
+    if (settingType != null) {
+        e.preventDefault();
+    }
     let overlay = document.querySelector(".overlay");
     overlay.classList.remove("hide");
     overlay.classList.add("show");
@@ -241,14 +244,18 @@ function showOverlay(e) {
 }
 
 function showModal(e) {
-    e.preventDefault();
+    if (settingType != null) {
+        e.preventDefault();
+    }
     let modal = document.querySelector(".modalw");
     modal.classList.remove("off");
     modal.classList.add("on");
 }
 
 function hideOverlay(e) {
-    e.preventDefault();
+    if (settingType != null) {
+        e.preventDefault();
+    }
     e.stopPropagation(); // don't allow clicks to pass through
     let overlay = document.querySelector(".overlay");
     overlay.classList.remove("show");
@@ -257,7 +264,9 @@ function hideOverlay(e) {
 }
 
 function hideModal(e) {
-    e.preventDefault();
+    if (settingType != null) {
+        e.preventDefault();
+    }
     let modal = document.querySelector(".modalw");
     modal.classList.remove("on");
     modal.classList.add("off");
