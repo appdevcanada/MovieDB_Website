@@ -9,20 +9,22 @@ let indexOfType = 0;
 let typeKey = "type";
 let setKey = "set";
 let dateKey = "date";
-let timeStaled = 10000; //3600000;
+let timeStaled = 3600000;
+let maxPos = 300;
 
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
-    document.getElementById("search-input").focus();
     addEventListeners();
     getPosterSizesAndURL();
     getLSData();
+    document.getElementById("search-input").focus();
 }
 
 function addEventListeners() {
     let searchButton = document.querySelector(".searchButtonDiv");
     searchButton.addEventListener("click", startSearch);
+    searchButton.addEventListener("keypress", pressEvent);
     let settingButton = document.querySelector(".settingButtonDiv");
     settingButton.addEventListener("click", showOverlay);
 
@@ -66,16 +68,6 @@ function getLSData() {
     }
 }
 
-function getLS2Data() {
-    // load img sizes from local storage
-
-    // it's first time and not exist
-
-    // the data is stale (over 1 hour old)
-
-    // else load from local storage
-}
-
 function getPosterSizesAndURL() {
     let url = `${movieDBURL}configuration?api_key=${APIKEY}`;
 
@@ -84,7 +76,6 @@ function getPosterSizesAndURL() {
             return response.json();
         })
         .then(function (data) {
-console.log(data);
             imageURL = data.images.base_url;
             imageSizes = data.images.poster_sizes;
             console.log(imageSizes);
@@ -103,6 +94,13 @@ function saveLSData() {
     document.getElementById("search-input").focus();
 }
 
+function pressEvent(e) {
+    let keyCode = e.keyCode;
+    if (keyCode == 13) {
+        startSearch();
+    }
+}
+
 function startSearch() {
     searchString = document.getElementById("search-input");
     if (!searchString.value) {
@@ -114,45 +112,122 @@ function startSearch() {
 }
 
 function getSearchResults() {
+    let dataCard = document.querySelector("#search-results");
+    dataCard.innerHTML = "";
     let url = `${movieDBURL}search/${settingType}?api_key=${APIKEY}&query=${searchString.value}`;
     fetch(url)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
-//            console.log(data);
-//            imageURL = data.images.base_url;
-//            imageSizes = data.images.poster_sizes;
-            fillDataCards(data);
+            if (data.results.length == 0) {
+                alert("Sorry, no result for this search!");
+                return;
+            }
+            if (settingType == "movie") {
+                fillDataCardsMV(data);
+            } else {
+                fillDataCardsTV(data);
+            }
         })
         .catch(function (error) {
             alert(error);
         })
 }
 
-//             <section class="title">
-//               <div class="image"><img src="https://image.tmdb.org/t/p/w200/kqjL17yufvn9OVLyXYpvtyrFfak.jpg" /></div>
-//                <div class="nameTitle">MAD MAX</div>
-//                <div class="date">2018-11-28</div>
-//                <div class="txtTitle"><p>Lorem</p></div>
-
-function fillDataCards(data) {
+function fillDataCardsMV(data) {
+    console.log(data);
     let dataCard = document.querySelector("#search-results");
-//    dataCard.innerHTML = "";
     for (let item in data.results) {
         let sec = document.createElement("section");
         sec.setAttribute("class", "title");
-        sec.append;
         let divImg = document.createElement("div");
         divImg.setAttribute("class", "image");
         let img = document.createElement("img");
-        img.setAttribute("src", imageURL + "w200/" + data.results[item].poster_path);
-        dataCard.appendChild(img);
-        dataCard.appendChild(divImg);
-        //        sec.innerHTML = data.results[item];
+        if (data.results[item].poster_path != null) {
+            img.setAttribute("src", imageURL + "w185/" + data.results[item].poster_path);
+        } else if (data.results[item].backdrop_path != null) {
+            img.setAttribute("src", imageURL + "w185/" + data.results[item].backdrop_path);
+        } else {
+            img.setAttribute("src", "icon/png/noimage.jpg");
+        }
+        img.setAttribute("alt", data.results[item].title);
+        let divTtl = document.createElement("div");
+        divTtl.setAttribute("class", "nameTitle");
+        divTtl.textContent = data.results[item].title;
+        let divDate = document.createElement("div");
+        divDate.setAttribute("class", "date");
+        divDate.textContent = data.results[item].release_date;
+        let divTxtTtl = document.createElement("div");
+        divTxtTtl.setAttribute("class", "txtTitle");
+
+        let ovw = data.results[item].overview;
+        if (ovw == "") {
+            ovw = "We don't have an overview to show you here. As soons as we have one, you're going to see it. Meanwhile, help us expand our database by adding one.";
+        }
+        if (ovw.length > maxPos) {
+            let txtTrunc = ovw.substring(0, maxPos - 3) + '...';
+            divTxtTtl.textContent = txtTrunc;
+        } else {
+            divTxtTtl.textContent = ovw;
+        }
         dataCard.appendChild(sec);
+        sec.appendChild(divImg);
+        divImg.appendChild(img);
+        sec.appendChild(divTtl);
+        sec.appendChild(divDate);
+        sec.appendChild(divTxtTtl);
     }
 }
+
+function fillDataCardsTV(data) {
+    console.log(data);
+    let dataCard = document.querySelector("#search-results");
+    for (let item in data.results) {
+        let sec = document.createElement("section");
+        sec.setAttribute("class", "title");
+        let divImg = document.createElement("div");
+        divImg.setAttribute("class", "image");
+        let img = document.createElement("img");
+        if (data.results[item].poster_path != null) {
+            img.setAttribute("src", imageURL + "w185/" + data.results[item].poster_path);
+        } else if (data.results[item].backdrop_path != null) {
+            img.setAttribute("src", imageURL + "w185/" + data.results[item].backdrop_path);
+        } else {
+            img.setAttribute("src", "icon/png/noimage.jpg");
+        }
+        img.setAttribute("alt", data.results[item].title);
+        let divTtl = document.createElement("div");
+        divTtl.setAttribute("class", "nameTitle");
+        divTtl.textContent = data.results[item].name;
+        let divDate = document.createElement("div");
+        divDate.setAttribute("class", "date");
+        divDate.textContent = data.results[item].first_air_date;
+        let divTxtTtl = document.createElement("div");
+        divTxtTtl.setAttribute("class", "txtTitle");
+
+        let ovw = data.results[item].overview;
+        if (ovw == "") {
+            ovw = "We don't have an overview to show you here. As soons as we have one, you're going to see it. Meanwhile, help us expand our database by adding one.";
+        }
+        if (ovw.length > maxPos) {
+            let txtTrunc = ovw.substring(0, maxPos - 3) + '...';
+            divTxtTtl.textContent = txtTrunc;
+        } else {
+            divTxtTtl.textContent = ovw;
+        }
+        dataCard.appendChild(sec);
+        sec.appendChild(divImg);
+        divImg.appendChild(img);
+        sec.appendChild(divTtl);
+        sec.appendChild(divDate);
+        sec.appendChild(divTxtTtl);
+    }
+}
+
+/***********************************
+        MODALS / OVERLAYS
+***********************************/
 
 function showOverlay(e) {
     e.preventDefault();

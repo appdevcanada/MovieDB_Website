@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css?family=Ubuntu:400,700");
+@import url("https://fonts.googleapis.com/css?family=Ubuntu");
+@import url('https://fonts.googleapis.com/css?family=Bree+Serif');
 @import url("//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
 
 /*@include "_variables.css"*/
@@ -37,11 +38,11 @@ html {
 }
 
 /*************************************************
-                OVERLAY / MODALS
+                MODALS / OVERLAYS
 *************************************************/
 #modalButton {
     position: relative;
-    left: 45%;
+    left: 25%;
 }
 
 .overlay {
@@ -57,14 +58,15 @@ html {
 
 .modalw {
     position: fixed;
-    width: 500px;
-    height: 280px;
-    z-index: 2000;
-    top: calc((100% - 280px)/2);
-    left: calc((100% - 500px)/2);
+    width: 350px;
+    height: 250px;
+    z-index: 200;
+    top: calc((100% - 250px)/2);
+    left: calc((100% - 350px)/2);
     line-height: 1.5rem;
     color: hsl(0, 0%, 33%);
     background-color: hsl(0, 0%, 93%);
+    border-radius: 10px;
 }
 
 .mini-modal {
@@ -97,41 +99,71 @@ html {
 
 .cancelButton,
 .saveButton {
-    width: 120px;
+    width: 100px;
     position: absolute;
     border: none;
     background-color: hsl(150, 100%, 10%);
     color: hsl(0, 100%, 100%);
     cursor: pointer;
-    padding: 0.25rem 2rem;
-    font-size: 1.2rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 1.1rem;
 }
 
 .saveButton {
     bottom: 1rem;
-    right: 4rem;
+    right: 2rem;
 }
 
 .cancelButton {
     bottom: 1rem;
-    left: 4rem;
+    left: 2rem;
 }
 
 .modal-header {
     padding: 1rem;
-    font-size: 1.5rem;
     background-color: hsl(150, 100%, 30%);
     color: hsl(0, 100%, 100%);
-    text-align: center;
+    justify-content: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
-.modal-header h2 {
-    font-size: 1.2rem;
+.modal-header h3 {
+    font-size: 1.4rem;
 }
 
 .modal-radio {
     text-align: center;
-    margin-top: 4rem;
+    margin-top: 2rem;
+    display: grid;
+    grid-template-areas:
+        "rbM lbM"
+        "rbT lbT";
+    grid-template-columns: 1fr 1fr;
+}
+
+#movie {
+    grid-area: rbM;
+    justify-self: end;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+#tv {
+    grid-area: rbT;
+    justify-self: end;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+#lbM {
+    grid-area: lbM;
+    justify-self: start;
+}
+
+#lbT {
+    grid-area: lbT;
+    justify-self: start;
 }
 
 .modal-radio label {
@@ -160,7 +192,6 @@ input {
     grid-template-areas:
         "l s s s c";
     grid-template-columns: repeat(5, 1fr);
-
 }
 
 .logoDB {
@@ -192,12 +223,12 @@ input {
     background: #fcfcfc;
     border: 1px solid #aaa;
     border-radius: 5px;
-    box-shadow: 0 0 3px #ccc, 0 10px 15px #ebebeb inset;
+    box-shadow: 0 0 4px #ccc, 0 10px 15px #ebebeb inset;
 }
 
 .searchButtonDiv .fa-search {
     position: relative;
-    top: 2px;
+    top: 0;
     left: 30px;
 }
 
@@ -260,25 +291,48 @@ button:hover {
     grid-template-areas:
         "im tt"
         "im dt"
+        "im tx"
+        "im tx"
+        "im tx"
+        "im tx"
         "im tx";
     grid-template-columns: 1fr 1fr;
     width: 30%;
+    background-color: hsl(142, 70%, 10%);
+    color: hsl(0, 0%, 100%);
 }
 
 .image {
     grid-area: im;
+    justify-self: start;
+    align-self: start;
 }
 
 .nameTitle {
     grid-area: tt;
+    align-content: top;
+    align-self: start;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: hsl(142, 70%, 70%);
+    margin-right: 10px;
+    font-family: 'Bree Serif', Times, 'Times New Roman', serif;
 }
 
 .date {
     grid-area: dt;
+    align-content: top;
+    align-self: start;
+    margin-right: 10px;
 }
 
 .txtTitle {
     grid-area: tx;
+    align-content: top;
+    align-self: start;
+    text-align: justify;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .txtTitle p {
@@ -315,22 +369,6 @@ footer {
 *************************************************/
 @media (max-width: 599px) {
 
-    header > h1 > span {
-        font-size: 2.8rem;
-    }
-
-    li {
-        background-size: 50px;
-        padding: 2rem 1.4rem 2rem 1.4rem;
-        font-size: 1.1rem;
-    }
-
-    label,
-    span {
-        font-size: 1.1rem;
-    }
-
-    .results,
     main {
         min-height: calc(100vh - 186px);
     }
@@ -339,34 +377,17 @@ footer {
         font-size: 1.2rem;
     }
 
-    .logoDB {
-        margin-left: 10px;
-    }
-
     .title {
         width: 80%;
+    }
+
+    .logoDB {
+        margin-left: 10px;
     }
 }
 
 @media (min-width: 600px) and (max-width:999px) {
 
-    header > h1 > span {
-        font-size: 3rem;
-    }
-
-    li {
-        background-size: 75px;
-        padding: 2rem 2rem 2rem 2rem;
-        font-size: 2rem;
-    }
-
-    button,
-    label,
-    span {
-        font-size: 1.2rem;
-    }
-
-    .results,
     main {
         min-height: calc(100vh - 186px);
     }
@@ -382,36 +403,12 @@ footer {
 
 @media (min-width: 1000px) {
 
-    header > h1 > span {
-        font-size: 3.2rem;
-    }
-
-    li {
-        background-size: 100px;
-        padding: 2rem 3rem 2rem 3rem;
-        font-size: 2.5rem;
-    }
-
-    .mainList2 {
-        width: 50%;
-    }
-
-    button,
-    label,
-    span {
-        font-size: 1.3rem;
-    }
-
-    .results {
-        min-height: calc(100vh - 188px);
+    main {
+        min-height: calc(100vh - 186px);
     }
 
     footer {
         font-size: 1.4rem;
-    }
-
-    main {
-        min-height: calc(100vh - 186px);
     }
 
     .title {

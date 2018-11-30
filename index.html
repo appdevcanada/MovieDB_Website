@@ -15,7 +15,7 @@
             <div class="logoDB"><img id="logoMD" alt="The Movie DataBase" src="https://www.themoviedb.org/assets/1/v4/logos/208x226-stacked-green-9484383bd9853615c113f020def5cbe27f6d08a84ff834f41371f223ebad4a3c.png" /></div>
             <div class="searchButtonDiv">
                 <span class="fa fa-search pointer"></span>
-                <input type="text" id="search-input" placeholder="Search item" />
+                <input type="text" id="search-input" placeholder="Search item here..." />
             </div>
             <div class="settingButtonDiv">
                 <img id="modalButton" alt="Settings" title="Settings" data-src="icon/svg/smart/settings.svg" class="iconic iconic-md" />
@@ -36,21 +36,18 @@
 
         <div class="overlay hide">&nbsp;</div>
 
-
         <div class="modalw off">
             <div class="modal-header">
-                <h2>Choose your Search</h2>
+                <h3>Choose your Search</h3>
             </div>
             <div class="modal-radio">
                 <input type="radio" name="settings" value="movie" id="movie" checked>
-                <label for="Movie">Movie</label>
-                &nbsp;&nbsp;
+                <label for="Movie" id="lbM">Movie</label>
                 <input type="radio" name="settings" value="tv" id="tv">
-                <label for="TV">TV</label>
+                <label for="TV" id="lbT">TV</label>
             </div>
             <button class="cancelButton">Cancel</button>
             <button class="saveButton">Save</button>
-
         </div>
 
     </main>
