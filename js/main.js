@@ -1,6 +1,6 @@
 /* globals APIKEY */
 
-const mdbURL = "https:/api.themoviedb.org/3/";
+const mdbURL = "https://api.themoviedb.org/3/";
 let imageURL = null;
 let imageSizes = {};
 let searchString = "";
