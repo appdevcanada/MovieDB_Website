@@ -72,7 +72,7 @@ function getPosterSizesAndURL() {
 //    let url = `${movieDBURL}configuration?api_key=${APIKEY}`;
     let url = movieDBURL + "configuration?api_key=" + APIKEY;
 console.log(`${movieDBURL}configuration?api_key=${APIKEY}`);
-consolde.log(url);
+console.log(url);
     fetch(url)
         .then(function (response) {
             return response.json();
