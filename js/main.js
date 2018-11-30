@@ -1,6 +1,6 @@
 /* globals APIKEY */
 
-const movieDBURL = "https:/api.themoviedb.org/3/";
+const mdbURL = "https:/api.themoviedb.org/3/";
 let imageURL = null;
 let imageSizes = {};
 let searchString = "";
@@ -69,10 +69,7 @@ function getLSData() {
 }
 
 function getPosterSizesAndURL() {
-//    let url = `${movieDBURL}configuration?api_key=${APIKEY}`;
-    let url = movieDBURL + "configuration?api_key=" + APIKEY;
-console.log(`${movieDBURL}configuration?api_key=${APIKEY}`);
-console.log(url);
+    let url = `${mdbURL}configuration?api_key=${APIKEY}`;
     fetch(url)
         .then(function (response) {
             return response.json();
@@ -116,7 +113,7 @@ function startSearch() {
 function getSearchResults() {
     let dataCard = document.querySelector("#search-results");
     dataCard.innerHTML = "";
-    let url = `${movieDBURL}search/${settingType}?api_key=${APIKEY}&query=${searchString.value}`;
+    let url = `${mdbURL}search/${settingType}?api_key=${APIKEY}&query=${searchString.value}`;
     fetch(url)
         .then(function (response) {
             return response.json();
