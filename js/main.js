@@ -75,9 +75,10 @@ function getPosterSizesAndURL() {
             return response.json();
         })
         .then(function (data) {
-            imageURL = data.images.base_url;
+            imageURL = data.images.secure_base_url;
             imageSizes = data.images.poster_sizes;
             console.log(imageSizes);
+            console.log(imageURL);
         })
         .catch(function (error) {
             alert(error);
