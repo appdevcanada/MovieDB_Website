@@ -13,13 +13,14 @@
 <body>
     <div class="mini-modal on">
         <div class="flexg">
-            <div class="logoDB"><img id="logoMD" alt="The Movie DataBase" src="https://www.themoviedb.org/assets/1/v4/logos/208x226-stacked-green-9484383bd9853615c113f020def5cbe27f6d08a84ff834f41371f223ebad4a3c.png" /></div>
-            <div class="searchButtonDiv">
-                <span class="fa fa-search pointer"></span>
-                <input type="text" id="search-input" placeholder="Search item here..." />
+            <div class="logoDB"><img id="logoMD" alt="The Movie DataBase" src="https://www.themoviedb.org/assets/1/v4/logos/208x226-stacked-green-9484383bd9853615c113f020def5cbe27f6d08a84ff834f41371f223ebad4a3c.png" />
             </div>
-            <div class="settingButtonDiv">
-                <img id="modalButton" alt="Settings" title="Settings" data-src="icon/svg/smart/settings.svg" class="iconic iconic-md" />
+            <div class="searchButtonDiv sample one">
+                <input type="text" class="search" id="search-input" name="search" placeholder="Search">
+                <button type="submit" class="btn btn-search fa fa-search pointer"></button>
+            </div>
+            <div class="settingButtonDiv pointer">
+                <img id="modalButton" alt="Settings" title="Settings" data-src="icon/svg/smart/settings.svg" class="iconic iconic-md" data-file-extension="CCP4" />
             </div>
         </div>
     </div>
@@ -42,9 +43,9 @@
                 <h3>Choose your Search</h3>
             </div>
             <div class="modal-radio">
-                <input type="radio" name="settings" value="movie" id="movie">
+                <input type="radio" name="optSettings" value="movie" id="movie">
                 <label for="Movie" id="lbM">Movie</label>
-                <input type="radio" name="settings" value="tv" id="tv">
+                <input type="radio" name="optSettings" value="tv" id="tv">
                 <label for="TV" id="lbT">TV</label>
             </div>
             <button class="cancelButton">Cancel</button>

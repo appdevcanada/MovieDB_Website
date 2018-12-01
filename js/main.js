@@ -10,7 +10,7 @@ let typeKey = "type";
 let setKey = "set";
 let dateKey = "date";
 let timeStaled = 3600000;
-let maxPos = 300;
+let maxPos = 200;
 
 document.addEventListener("DOMContentLoaded", init);
 
@@ -30,7 +30,7 @@ function addEventListeners() {
 
     document.querySelector(".cancelButton").addEventListener("click", hideOverlay);
     document.querySelector(".saveButton").addEventListener("click", function (e) {
-        let setList = document.getElementsByName("settings");
+        let setList = document.getElementsByName("optSettings");
         settingType = null;
         indexOfType = null;
         for (let i = 0; i < setList.length; i++) {
@@ -48,7 +48,7 @@ function addEventListeners() {
 function getLSData() {
     // First see if data exists in local storage
     if (localStorage.getItem(typeKey)) {
-        let selIndex = document.getElementsByName("settings");
+        let selIndex = document.getElementsByName("optSettings");
         indexOfType = JSON.parse(localStorage.getItem(typeKey));
         settingType = JSON.parse(localStorage.getItem(setKey));
 
@@ -57,9 +57,9 @@ function getLSData() {
         let now = new Date();
         let savedDate = JSON.parse(localStorage.getItem(dateKey));
         savedDate = new Date(savedDate);
+        console.log(savedDate);
+        console.log(now);
         if ((now - savedDate) > timeStaled) {
-            console.log(savedDate);
-            console.log(now);
             getPosterSizesAndURL();
             saveLSData(indexOfType);
         }
@@ -110,6 +110,8 @@ function startSearch() {
     if (settingType != null) {
         getSearchResults();
     } else {
+        document.getElementsByName("optSettings")[0].checked = false;
+        document.getElementsByName("optSettings")[1].checked = false;
         showOverlay();
     }
 }
@@ -152,7 +154,7 @@ function fillDataCardsMV(data) {
         } else if (data.results[item].backdrop_path != null) {
             img.setAttribute("src", imageURL + "w185/" + data.results[item].backdrop_path);
         } else {
-            img.setAttribute("src", "icon/png/noimage.jpg");
+            img.setAttribute("src", "icon/png/noimage.png");
         }
         img.setAttribute("alt", data.results[item].title);
         let divTtl = document.createElement("div");
@@ -161,12 +163,15 @@ function fillDataCardsMV(data) {
         let divDate = document.createElement("div");
         divDate.setAttribute("class", "date");
         divDate.textContent = data.results[item].release_date;
+        if (divDate.textContent == "") {
+            divDate.textContent = "Not Defined";
+        }
         let divTxtTtl = document.createElement("div");
         divTxtTtl.setAttribute("class", "txtTitle");
 
         let ovw = data.results[item].overview;
         if (ovw == "") {
-            ovw = "We don't have an overview to show you here. As soons as we have one, you're going to see it. Meanwhile, help us expand our database by adding one.";
+            ovw = "We don't have an overview to show here. As soons as we have one, you're going to see it. Meanwhile, help us expand our database by adding one.";
         }
         if (ovw.length > maxPos) {
             let txtTrunc = ovw.substring(0, maxPos - 3) + '...';
@@ -197,7 +202,7 @@ function fillDataCardsTV(data) {
         } else if (data.results[item].backdrop_path != null) {
             img.setAttribute("src", imageURL + "w185/" + data.results[item].backdrop_path);
         } else {
-            img.setAttribute("src", "icon/png/noimage.jpg");
+            img.setAttribute("src", "icon/png/noimage.png");
         }
         img.setAttribute("alt", data.results[item].title);
         let divTtl = document.createElement("div");
@@ -206,12 +211,15 @@ function fillDataCardsTV(data) {
         let divDate = document.createElement("div");
         divDate.setAttribute("class", "date");
         divDate.textContent = data.results[item].first_air_date;
+        if (divDate.textContent == "") {
+            divDate.textContent = "Not Defined";
+        }
         let divTxtTtl = document.createElement("div");
         divTxtTtl.setAttribute("class", "txtTitle");
 
         let ovw = data.results[item].overview;
         if (ovw == "") {
-            ovw = "We don't have an overview to show you here. As soons as we have one, you're going to see it. Meanwhile, help us expand our database by adding one.";
+            ovw = "We don't have an overview to show here. As soons as we have one, you're going to see it. Meanwhile, help us expand our database by adding one.";
         }
         if (ovw.length > maxPos) {
             let txtTrunc = ovw.substring(0, maxPos - 3) + '...';

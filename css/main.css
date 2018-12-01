@@ -16,7 +16,7 @@ html {
     text-align: center;
     font-family: Ubuntu, Helvetica, Arial, sans-serif;
     font-size: 16px;
-    line-height: 1.5rem;
+    line-height: 1.2rem;
 }
 
 :root {
@@ -27,7 +27,6 @@ html {
     --h-bg-clr: hsl(1, 0%, 90%);
     --b-bg-clr: hsl(1, 0%, 50%);
     --b-h-bg-clr: hsl(142, 70%, 30%);
-    --b-h-box-sdw: 0 0 10px hsl(206, 69%, 47%);
     --i-clr: hsl(1, 0%, 30%);
     --i-box-sdw: 2px 2px 3px 1px hsl(1, 0%, 50%);
 }
@@ -72,7 +71,7 @@ html {
 .mini-modal {
     position: fixed;
     width: 100%;
-    height: 100px;
+    height: 90px;
     z-index: 50;
     top: 0;
     left: 0;
@@ -120,7 +119,7 @@ html {
 }
 
 .modal-header {
-    padding: 1rem;
+    padding: 0.8rem;
     background-color: hsl(150, 100%, 30%);
     color: hsl(0, 100%, 100%);
     justify-content: center;
@@ -129,7 +128,8 @@ html {
 }
 
 .modal-header h3 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+    margin-top: 10px
 }
 
 .modal-radio {
@@ -171,74 +171,136 @@ html {
 }
 
 /*************************************************
+                SEARCH BOX
+*************************************************/
+input.search {
+    border: 2px solid hsla(150, 100%, 10%, 0.8);
+    font-size: 1rem;
+    height: 30px;
+    padding: 4px 8px;
+    position: absolute;
+    width: 100%;
+    text-align: left;
+    text-indent: 10px;
+}
+
+input.search:focus {
+    outline: none;
+    border: 2px solid #15C970;
+}
+
+button {
+    text-align: center;
+}
+
+button:focus {
+    outline: none;
+}
+
+button.btn-search {
+    background: #15C970;
+    border: none;
+    height: 30px;
+    font-size: 12px;
+    padding: 4px;
+    position: absolute;
+    width: 30px;
+}
+
+.sample {
+    grid-area: s;
+    float: left;
+    height: 60px;
+    position: relative;
+    width: 100%;
+}
+
+.sample.one input {
+    border-radius: 15px;
+    right: 0;
+    transition: all 0.3s ease-in-out;
+    width: 40%;
+}
+
+.sample.one input.search:focus {
+    width: 90%;
+}
+
+.sample.one input:focus ~ button.btn-search {
+    background: #15C970;
+    color: #fff;
+}
+
+.sample.one button {
+    transition: all 0.3s ease-in-out;
+}
+
+.sample.one button.btn-search {
+    background: hsla(150, 100%, 10%, 0.8);
+    border-radius: 50%;
+    height: 26px;
+    right: 2px;
+    top: 2px;
+    transition: all 0.3s ease-in-out;
+    width: 26px;
+}
+
+
+/*************************************************
                     GENERAL
 *************************************************/
 
 .iconic * {
-    fill: hsl(1, 0%, 90%);
-    stroke: hsl(1, 0%, 90%);
+    fill: #15C970;
+    stroke: hsl(1, 0%, 100%);
 }
 
 button,
 input {
     font-family: Ubuntu, Helvetica, Arial, sans-serif;
     padding: 0.4rem;
-    margin-top: 20px;
+    margin-top: 30px;
     font-size: 1rem;
 }
 
 .flexg {
     display: grid;
     grid-template-areas:
-        "l s s s c";
-    grid-template-columns: repeat(5, 1fr);
+        "l s c";
+    grid-template-columns: 1fr 3fr 1fr;
 }
 
 .logoDB {
-    margin-left: 10px;
+    margin-left: 20px;
+    margin-right: 10px;
     margin-top: 6px;
     grid-area: l;
     justify-self: start;
 }
 
 #logoMD {
-    width: 80px;
-    height: 87px;
+    width: 70px;
+    height: 77px;
 }
 
 .searchButtonDiv {
     grid-area: s;
-    position: relative;
-    color: hsl(1, 0%, 60%);
-    font-size: 16px;
 }
 
-.searchButtonDiv input {
-    margin-top: 34px;
-    width: 90%;
-    height: 32px;
-    text-indent: 32px;
-    text-align: left;
-
-    background: #fcfcfc;
-    border: 1px solid #aaa;
-    border-radius: 5px;
-    box-shadow: 0 0 4px #ccc, 0 10px 15px #ebebeb inset;
+.settingButtonDiv {
+    margin-top: 29px;
+    margin-right: 20px;
+    grid-area: c;
+    justify-self: end;
 }
 
+/*
 .searchButtonDiv .fa-search {
     position: relative;
     top: 0;
     left: 30px;
 }
-
-.settingButtonDiv {
-    margin-top: 34px;
-    margin-right: 20px;
-    grid-area: c;
-    justify-self: end;
-    cursor: pointer;
-}
+*/
 
 .pointer {
     cursor: pointer;
@@ -253,7 +315,7 @@ main {
             HEADER
 *************************************************/
 header {
-    margin-top: 110px;
+    margin-top: 100px;
 }
 
 
@@ -295,48 +357,57 @@ button:hover {
         "im tx"
         "im tx"
         "im tx"
+        "im tx"
+        "im tx"
+        "im tx"
+        "im tx"
+        "im tx"
+        "im tx"
         "im tx";
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(185px, 1fr);
     width: 30%;
     background-color: hsl(142, 70%, 10%);
     color: hsl(0, 0%, 100%);
+    align-content: start;
+    justify-self: start;
 }
 
 .image {
     grid-area: im;
     justify-self: start;
-    align-self: start;
+    min-height: 278px;
 }
 
 .nameTitle {
     grid-area: tt;
-    align-content: top;
     align-self: start;
     font-size: 1.2rem;
     font-weight: 500;
     color: hsl(142, 70%, 70%);
     margin-right: 10px;
     font-family: 'Bree Serif', Times, 'Times New Roman', serif;
+    min-height: 20px;
 }
 
 .date {
     grid-area: dt;
-    align-content: top;
     align-self: start;
     margin-right: 10px;
+    max-height: 20px;
 }
 
 .txtTitle {
     grid-area: tx;
-    align-content: top;
     align-self: start;
     text-align: justify;
     margin-right: 10px;
     margin-left: 10px;
+    max-height: 238px;
 }
 
 .txtTitle p {
     text-align: justify;
+    align-self: start;
 }
 
 #max,
@@ -351,7 +422,7 @@ button:hover {
             FOOTER
 *************************************************/
 footer {
-    background-color: hsl(1, 0%, 30%);
+    background-color: hsl(1, 0%, 10%);
     color: hsl(0, 100%, 100%);
     width: 100%;
     height: 76px;
@@ -397,11 +468,11 @@ footer {
     }
 
     .title {
-        width: 60%;
+        width: 90%;
     }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1000px) and (max-width:1299px) {
 
     main {
         min-height: calc(100vh - 186px);
@@ -412,6 +483,21 @@ footer {
     }
 
     .title {
-        width: 30%;
+        width: 46%;
+    }
+}
+
+@media (min-width: 1300px) {
+
+    main {
+        min-height: calc(100vh - 186px);
+    }
+
+    footer {
+        font-size: 1.4rem;
+    }
+
+    .title {
+        width: 32%;
     }
 }
