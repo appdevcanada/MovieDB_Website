@@ -2,8 +2,6 @@
 @import url('https://fonts.googleapis.com/css?family=Bree+Serif');
 @import url("//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
 
-/*@include "_variables.css"*/
-
 /*************************************************
                 DEFAULTS
 *************************************************/
@@ -71,7 +69,7 @@ html {
 .mini-modal {
     position: fixed;
     width: 100%;
-    height: 90px;
+    height: 110px;
     z-index: 50;
     top: 0;
     left: 0;
@@ -80,12 +78,12 @@ html {
     background-color: hsla(150, 100%, 10%, 0.8);
 }
 
-.show {
+.show, .page {
     display: block;
 }
 
 .hide {
-    display: none;
+    display: none !important;
 }
 
 .off {
@@ -189,10 +187,6 @@ input.search:focus {
     border: 2px solid #15C970;
 }
 
-button {
-    text-align: center;
-}
-
 button:focus {
     outline: none;
 }
@@ -255,6 +249,11 @@ button.btn-search {
     stroke: hsl(1, 0%, 100%);
 }
 
+.star {
+    width: 20px;
+    height: 20px;
+}
+
 button,
 input {
     font-family: Ubuntu, Helvetica, Arial, sans-serif;
@@ -266,15 +265,17 @@ input {
 .flexg {
     display: grid;
     grid-template-areas:
-        "l s c";
+        "l s c"
+        "l q c"
+        "l p c";
     grid-template-columns: 1fr 3fr 1fr;
 }
 
 .logoDB {
+    grid-area: l;
     margin-left: 20px;
     margin-right: 10px;
-    margin-top: 6px;
-    grid-area: l;
+    margin-top: 16px;
     justify-self: start;
 }
 
@@ -287,27 +288,29 @@ input {
     grid-area: s;
 }
 
-.settingButtonDiv {
-    margin-top: 29px;
-    margin-right: 20px;
-    grid-area: c;
-    justify-self: end;
+#items-count {
+    grid-area: q;
+    justify-content: center;
 }
 
-/*
-.searchButtonDiv .fa-search {
-    position: relative;
-    top: 0;
-    left: 30px;
+#pagings {
+    grid-area: p;
+    justify-content: center;
 }
-*/
+
+.settingButtonDiv {
+    grid-area: c;
+    margin-top: 39px;
+    margin-right: 20px;
+    justify-self: end;
+}
 
 .pointer {
     cursor: pointer;
 }
 
 main {
-    min-height: 650px;
+    min-height: 700px;
 }
 
 
@@ -315,7 +318,7 @@ main {
             HEADER
 *************************************************/
 header {
-    margin-top: 100px;
+    margin-top: 120px;
 }
 
 
@@ -331,6 +334,7 @@ button {
     border-radius: 4px;
     -webkit-transition-duration: 0.8s;
     transition-duration: 0.8s;
+    text-align: center;
 }
 
 button:hover {
@@ -339,12 +343,20 @@ button:hover {
     cursor: pointer;
 }
 
-#search-results {
+#search-results, #recommend-results {
     clear: both;
     display: flex;
     flex-direction: row;
     flex-flow: wrap;
     justify-content: space-evenly;
+}
+
+.grow {
+    transition: all 0.5s ease;
+}
+
+.grow:hover {
+    transform: scale(1.2);
 }
 
 .title {
@@ -364,7 +376,7 @@ button:hover {
         "im tx"
         "im tx"
         "im tx";
-    grid-template-columns: minmax(185px, 1fr);
+    grid-template-columns: 185px 1fr;
     width: 30%;
     background-color: hsl(142, 70%, 10%);
     color: hsl(0, 0%, 100%);
@@ -425,11 +437,11 @@ footer {
     background-color: hsl(1, 0%, 10%);
     color: hsl(0, 100%, 100%);
     width: 100%;
-    height: 76px;
+    height: 86px;
 }
 
 #logoFooter {
-    margin-top: 10px;
+    margin-top: 20px;
     width: 110px;
     height: 50px;
 }
@@ -441,7 +453,7 @@ footer {
 @media (max-width: 599px) {
 
     main {
-        min-height: calc(100vh - 186px);
+        min-height: calc(100vh - 206px);
     }
 
     footer {
@@ -460,7 +472,7 @@ footer {
 @media (min-width: 600px) and (max-width:999px) {
 
     main {
-        min-height: calc(100vh - 186px);
+        min-height: calc(100vh - 206px);
     }
 
     footer {
@@ -475,7 +487,7 @@ footer {
 @media (min-width: 1000px) and (max-width:1299px) {
 
     main {
-        min-height: calc(100vh - 186px);
+        min-height: calc(100vh - 206px);
     }
 
     footer {
@@ -490,7 +502,7 @@ footer {
 @media (min-width: 1300px) {
 
     main {
-        min-height: calc(100vh - 186px);
+        min-height: calc(100vh - 206px);
     }
 
     footer {

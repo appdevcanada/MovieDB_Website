@@ -6,11 +6,15 @@ let imageSizes = {};
 let searchString = "";
 let settingType = null;
 let indexOfType = 0;
+let activePage = 1;
+let typePage = "S";
+let searchID = 0;
 let typeKey = "type";
 let setKey = "set";
 let dateKey = "date";
 let timeStaled = 3600000;
 let maxPos = 200;
+
 
 document.addEventListener("DOMContentLoaded", init);
 
@@ -119,8 +123,11 @@ function startSearch() {
 
 function getSearchResults() {
     let dataCard = document.querySelector("#search-results");
-    dataCard.innerHTML = "";
-    let url = `${mdbURL}search/${settingType}?api_key=${APIKEY}&query=${searchString.value}`;
+    if (activePage == 0) {
+        activePage = 1;
+    }
+    searchID = 0;
+    let url = `${mdbURL}search/${settingType}?api_key=${APIKEY}&page=${activePage}&query=${searchString.value}`;
     fetch(url)
         .then(function (response) {
             return response.json();
@@ -130,10 +137,15 @@ function getSearchResults() {
                 alert("Sorry, no result for this search!");
                 return;
             }
+            dataCard.innerHTML = "";
+            document.querySelector(".items-pages").textContent = "Results: " + data.total_results + " item(s)";
+            typePage = "S";
+            loadStars(data.total_pages);
+
             if (settingType == "movie") {
-                fillDataCardsMV(data);
+                fillDataCardsMV(data, "#search-results");
             } else {
-                fillDataCardsTV(data);
+                fillDataCardsTV(data, "#search-results");
             }
         })
         .catch(function (error) {
@@ -141,12 +153,74 @@ function getSearchResults() {
         })
 }
 
-function fillDataCardsMV(data) {
+function showRecom(e) {
+    if (searchID == 0) {
+        searchID = e.target.id;
+        console.log(searchID);
+    }
+    if (activePage == 0) {
+        activePage = 1;
+    }
+    let urlRecom = `${mdbURL}${settingType}/${searchID}/recommendations?api_key=${APIKEY}&page=${activePage}`;
+    fetch(urlRecom)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            if (data.results.length == 0) {
+                alert("Sorry, no recommendations!");
+                searchID = 0;
+                return;
+            }
+            typePage = "R";
+            loadStars(data.total_pages);
+            let pages = [];
+            pages = document.querySelectorAll(".page");
+            pages[0].classList.toggle("hide");
+            pages[1].classList.toggle("hide");
+            document.querySelector(".items-pages").textContent = "Results: " + data.total_results + " item(s)";
+            if (settingType == "movie") {
+                fillDataCardsMV(data, "#recommend-results");
+            } else {
+                fillDataCardsTV(data, "#recommend-results");
+            }
+        })
+        .catch(function (error) {
+            alert(error);
+        })
+}
+
+function loadStars(qt) {
+    let divPage = document.querySelector(".paging");
+    divPage.innerHTML = "";
+    for (let item = 1; item <= qt; item++) {
+        let img = document.createElement("img");
+        img.setAttribute("class", "star pointer");
+        img.setAttribute("title", "Page" + item);
+        if (item == activePage) {
+            img.setAttribute("src", "icon/png/stary.png");
+        } else {
+            img.setAttribute("src", "icon/png/star.svg");
+        }
+        img.setAttribute("id", item);
+        img.setAttribute("alt", "Page" + item);
+        divPage.appendChild(img);
+        divPage.addEventListener("click", flipPage);
+    }
+}
+
+function fillDataCardsMV(data, pageID) {
     console.log(data);
-    let dataCard = document.querySelector("#search-results");
+    let dataCard = document.querySelector(pageID);
     for (let item in data.results) {
         let sec = document.createElement("section");
-        sec.setAttribute("class", "title");
+        if (pageID == "#search-results") {
+            sec.setAttribute("class", "title pointer");
+        } else {
+            sec.setAttribute("class", "title");
+        }
+        //        sec.setAttribute("id", "title_search");
+        sec.setAttribute("id", data.results[item].id);
         let divImg = document.createElement("div");
         divImg.setAttribute("class", "image");
         let img = document.createElement("img");
@@ -165,14 +239,14 @@ function fillDataCardsMV(data) {
         divDate.setAttribute("class", "date");
         divDate.textContent = data.results[item].release_date;
         if (divDate.textContent == "") {
-            divDate.textContent = "Not Defined";
+            divDate.textContent = "Date Not Defined";
         }
         let divTxtTtl = document.createElement("div");
         divTxtTtl.setAttribute("class", "txtTitle");
 
         let ovw = data.results[item].overview;
         if (ovw == "") {
-            ovw = "We don't have an overview to show here. As soons as we have one, you're going to see it. Meanwhile, help us expand our database by adding one.";
+            ovw = "We don't have an overview for this yet. As soons as we have one, it'll be shown here. Meanwhile, help us expand our database by adding one.";
         }
         if (ovw.length > maxPos) {
             let txtTrunc = ovw.substring(0, maxPos - 3) + '...';
@@ -186,15 +260,22 @@ function fillDataCardsMV(data) {
         sec.appendChild(divTtl);
         sec.appendChild(divDate);
         sec.appendChild(divTxtTtl);
+        sec.addEventListener("click", showRecom);
     }
 }
 
-function fillDataCardsTV(data) {
+function fillDataCardsTV(data, pageID) {
     console.log(data);
-    let dataCard = document.querySelector("#search-results");
+    let dataCard = document.querySelector(pageID);
     for (let item in data.results) {
         let sec = document.createElement("section");
-        sec.setAttribute("class", "title");
+        if (pageID == "#search-results") {
+            sec.setAttribute("class", "title pointer");
+        } else {
+            sec.setAttribute("class", "title");
+        }
+        //        sec.setAttribute("id", "title_search");
+        sec.setAttribute("id", data.results[item].id);
         let divImg = document.createElement("div");
         divImg.setAttribute("class", "image");
         let img = document.createElement("img");
@@ -213,14 +294,14 @@ function fillDataCardsTV(data) {
         divDate.setAttribute("class", "date");
         divDate.textContent = data.results[item].first_air_date;
         if (divDate.textContent == "") {
-            divDate.textContent = "Not Defined";
+            divDate.textContent = "Date Not Defined";
         }
         let divTxtTtl = document.createElement("div");
         divTxtTtl.setAttribute("class", "txtTitle");
 
         let ovw = data.results[item].overview;
         if (ovw == "") {
-            ovw = "We don't have an overview to show here. As soons as we have one, you're going to see it. Meanwhile, help us expand our database by adding one.";
+            ovw = "We don't have an overview for this yet. As soons as we have one, it'll be shown here. Meanwhile, help us expand our database by adding one.";
         }
         if (ovw.length > maxPos) {
             let txtTrunc = ovw.substring(0, maxPos - 3) + '...';
@@ -234,6 +315,16 @@ function fillDataCardsTV(data) {
         sec.appendChild(divTtl);
         sec.appendChild(divDate);
         sec.appendChild(divTxtTtl);
+        sec.addEventListener("click", showRecom);
+    }
+}
+
+function flipPage(e) {
+    activePage = e.target.id;
+    if (typePage == "S") {
+        getSearchResults();
+    } else {
+        showRecom();
     }
 }
 

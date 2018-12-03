@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div class="mini-modal on">
+    <div class="mini-modal show">
         <div class="flexg">
             <div class="logoDB"><img id="logoMD" alt="The Movie DataBase" src="https://www.themoviedb.org/assets/1/v4/logos/208x226-stacked-green-9484383bd9853615c113f020def5cbe27f6d08a84ff834f41371f223ebad4a3c.png" />
             </div>
@@ -19,22 +19,22 @@
                 <input type="text" class="search" id="search-input" name="search" placeholder="Search">
                 <button type="submit" class="btn btn-search fa fa-search pointer"></button>
             </div>
-            <div class="settingButtonDiv pointer">
+            <div class="items-pages" id="items-count">
+            </div>
+            <div class="paging" id="pagings">
+            </div>
+            <div class="settingButtonDiv pointer grow">
                 <img id="modalButton" alt="Settings" title="Settings" data-src="icon/svg/smart/settings.svg" class="iconic iconic-md" data-file-extension="CCP4" />
             </div>
         </div>
     </div>
     <header></header>
     <main>
-        <div class="page" id="search-results">
+        <div class="page" id="search-results">&nbsp;
         </div>
 
-        <!--
-        <div class="page" id="recommend-results">
-            <section class="title"></section>
-            <section class="content"></section>
+        <div class="page hide" id="recommend-results">
         </div>
--->
 
         <div class="overlay hide">&nbsp;</div>
 
