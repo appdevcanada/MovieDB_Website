@@ -31,6 +31,8 @@ function addEventListeners() {
     searchButton.addEventListener("keypress", pressEvent);
     let settingButton = document.querySelector(".settingButtonDiv");
     settingButton.addEventListener("click", showOverlay);
+    let searchTxt = document.getElementById("search-input");
+    searchTxt.addEventListener("focus", cleanAll);
 
     document.querySelector(".cancelButton").addEventListener("click", hideOverlay);
     document.querySelector(".saveButton").addEventListener("click", function (e) {
@@ -47,6 +49,17 @@ function addEventListeners() {
         }
         hideOverlay(e);
     });
+}
+
+function cleanAll() {
+    searchID = 0;
+    activePage = 1;
+    typePage = "S";
+    document.getElementById("search-input").value = "";
+    document.querySelector(".paging").innerHTML = "";
+    document.querySelector("#items-count").innerHTML = "";
+    document.querySelector("#recommend-results").innerHTML = "";
+    document.querySelector("#search-results").innerHTML = "";
 }
 
 function getLSData() {
@@ -137,6 +150,10 @@ function getSearchResults() {
                 alert("Sorry, no result for this search!");
                 return;
             }
+            let pages = [];
+            pages = document.querySelectorAll(".page");
+            pages[0].classList.remove("hide");
+            pages[1].classList.add("hide");
             dataCard.innerHTML = "";
             document.querySelector(".items-pages").textContent = "Results: " + data.total_results + " item(s)";
             typePage = "S";
@@ -178,7 +195,7 @@ function showRecom(e) {
             pages = document.querySelectorAll(".page");
             pages[0].classList.toggle("hide");
             pages[1].classList.toggle("hide");
-            document.querySelector(".items-pages").textContent = "Results: " + data.total_results + " item(s)";
+            document.querySelector(".items-pages").textContent = "Recommended Results: " + data.total_results + " item(s)";
             if (settingType == "movie") {
                 fillDataCardsMV(data, "#recommend-results");
             } else {
