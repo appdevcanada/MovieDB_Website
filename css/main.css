@@ -78,7 +78,8 @@ html {
     background-color: hsla(150, 100%, 10%, 0.8);
 }
 
-.show, .page {
+.show,
+.page {
     display: block;
 }
 
@@ -258,17 +259,21 @@ button,
 input {
     font-family: Ubuntu, Helvetica, Arial, sans-serif;
     padding: 0.4rem;
-    margin-top: 30px;
     font-size: 1rem;
 }
 
 .flexg {
     display: grid;
     grid-template-areas:
+        "l m c"
         "l s c"
         "l q c"
         "l p c";
     grid-template-columns: 1fr 3fr 1fr;
+  grid-auto-rows: 25px 30px 30px 25px;
+    height: 110px;
+    align-content: start;
+    justify-self: start;
 }
 
 .logoDB {
@@ -284,18 +289,32 @@ input {
     height: 77px;
 }
 
+#errormsg {
+    grid-area: m;
+    justify-content: center;
+    color: yellow;
+    font-size: 1.1rem;
+    align-self: baseline;
+}
+
 .searchButtonDiv {
     grid-area: s;
+    align-self: start;
+    justify-self: start;
+    margin: 0;
 }
 
 #items-count {
     grid-area: q;
     justify-content: center;
+    align-self: end;
+    font-size: 1.1rem;
 }
 
 #pagings {
     grid-area: p;
     justify-content: center;
+    align-self: baseline;
 }
 
 .settingButtonDiv {
@@ -343,7 +362,8 @@ button:hover {
     cursor: pointer;
 }
 
-#search-results, #recommend-results {
+#search-results,
+#recommend-results {
     clear: both;
     display: flex;
     flex-direction: row;

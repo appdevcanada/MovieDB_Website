@@ -55,6 +55,7 @@ function cleanAll() {
     searchID = 0;
     activePage = 1;
     typePage = "S";
+    document.querySelector("#errormsg").textContent = "";
     document.getElementById("search-input").value = "";
     document.querySelector(".paging").innerHTML = "";
     document.querySelector("#items-count").innerHTML = "";
@@ -115,13 +116,15 @@ function pressEvent(e) {
     let keyCode = e.keyCode;
     if (keyCode == 13) {
         startSearch();
+    } else {
+        document.querySelector("#errormsg").textContent = "";
     }
 }
 
 function startSearch() {
     searchString = document.getElementById("search-input");
     if (!searchString.value) {
-        alert("Please type something!");
+        document.querySelector("#errormsg").textContent = "Please type something!";
         searchString.focus();
         return;
     }
@@ -147,7 +150,11 @@ function getSearchResults() {
         })
         .then(function (data) {
             if (data.results.length == 0) {
-                alert("Sorry, no result for this search!");
+                document.querySelector("#errormsg").textContent = "Sorry, no result for this search!";
+                return;
+            }
+            if (data.total_results > 200) {
+                document.querySelector("#errormsg").textContent = "The result exceeds 200 items. Please refine your search!";
                 return;
             }
             let pages = [];
@@ -173,8 +180,10 @@ function getSearchResults() {
 function showRecom(e) {
     if (searchID == 0) {
         searchID = e.target.id;
+        activePage = 0;
         console.log(searchID);
     }
+    let dataCard = document.querySelector("#recommend-results");
     if (activePage == 0) {
         activePage = 1;
     }
@@ -185,16 +194,20 @@ function showRecom(e) {
         })
         .then(function (data) {
             if (data.results.length == 0) {
-                alert("Sorry, no recommendations!");
+                document.querySelector("#errormsg").textContent = "Sorry, no recommendations!";
                 searchID = 0;
                 return;
             }
+            document.querySelector("#errormsg").textContent = "";
             typePage = "R";
             loadStars(data.total_pages);
             let pages = [];
             pages = document.querySelectorAll(".page");
-            pages[0].classList.toggle("hide");
-            pages[1].classList.toggle("hide");
+//            pages[0].classList.toggle("hide");
+//            pages[1].classList.toggle("hide");
+            pages[1].classList.remove("hide");
+            pages[0].classList.add("hide");
+            dataCard.innerHTML = "";
             document.querySelector(".items-pages").textContent = "Recommended Results: " + data.total_results + " item(s)";
             if (settingType == "movie") {
                 fillDataCardsMV(data, "#recommend-results");
@@ -232,11 +245,11 @@ function fillDataCardsMV(data, pageID) {
     for (let item in data.results) {
         let sec = document.createElement("section");
         if (pageID == "#search-results") {
+            sec.addEventListener("click", showRecom);
             sec.setAttribute("class", "title pointer");
         } else {
             sec.setAttribute("class", "title");
         }
-        //        sec.setAttribute("id", "title_search");
         sec.setAttribute("id", data.results[item].id);
         let divImg = document.createElement("div");
         divImg.setAttribute("class", "image");
@@ -277,7 +290,6 @@ function fillDataCardsMV(data, pageID) {
         sec.appendChild(divTtl);
         sec.appendChild(divDate);
         sec.appendChild(divTxtTtl);
-        sec.addEventListener("click", showRecom);
     }
 }
 
@@ -287,6 +299,7 @@ function fillDataCardsTV(data, pageID) {
     for (let item in data.results) {
         let sec = document.createElement("section");
         if (pageID == "#search-results") {
+            sec.addEventListener("click", showRecom);
             sec.setAttribute("class", "title pointer");
         } else {
             sec.setAttribute("class", "title");
@@ -332,12 +345,12 @@ function fillDataCardsTV(data, pageID) {
         sec.appendChild(divTtl);
         sec.appendChild(divDate);
         sec.appendChild(divTxtTtl);
-        sec.addEventListener("click", showRecom);
     }
 }
 
 function flipPage(e) {
     activePage = e.target.id;
+    console.log(activePage);
     if (typePage == "S") {
         getSearchResults();
     } else {
