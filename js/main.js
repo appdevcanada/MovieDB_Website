@@ -154,7 +154,7 @@ function getSearchResults() {
                 return;
             }
             if (data.total_results > 200) {
-                document.querySelector("#errormsg").textContent = "The result exceeds 200 items. Please refine your search!";
+                document.querySelector("#errormsg").textContent = "Result 200+ items. Refine search!";
                 return;
             }
             let pages = [];
@@ -203,12 +203,12 @@ function showRecom(e) {
             loadStars(data.total_pages);
             let pages = [];
             pages = document.querySelectorAll(".page");
-//            pages[0].classList.toggle("hide");
-//            pages[1].classList.toggle("hide");
+            //            pages[0].classList.toggle("hide");
+            //            pages[1].classList.toggle("hide");
             pages[1].classList.remove("hide");
             pages[0].classList.add("hide");
             dataCard.innerHTML = "";
-            document.querySelector(".items-pages").textContent = "Recommended Results: " + data.total_results + " item(s)";
+            document.querySelector(".items-pages").textContent = "Recommendations: " + data.total_results + " item(s)";
             if (settingType == "movie") {
                 fillDataCardsMV(data, "#recommend-results");
             } else {
@@ -253,6 +253,7 @@ function fillDataCardsMV(data, pageID) {
         sec.setAttribute("id", data.results[item].id);
         let divImg = document.createElement("div");
         divImg.setAttribute("class", "image");
+        divImg.setAttribute("id", data.results[item].id);
         let img = document.createElement("img");
         if (data.results[item].poster_path != null) {
             img.setAttribute("src", imageURL + "w185/" + data.results[item].poster_path);
@@ -262,17 +263,21 @@ function fillDataCardsMV(data, pageID) {
             img.setAttribute("src", "icon/png/noimage.png");
         }
         img.setAttribute("alt", data.results[item].title);
+        img.setAttribute("id", data.results[item].id);
         let divTtl = document.createElement("div");
         divTtl.setAttribute("class", "nameTitle");
+        divTtl.setAttribute("id", data.results[item].id);
         divTtl.textContent = data.results[item].title;
         let divDate = document.createElement("div");
         divDate.setAttribute("class", "date");
+        divDate.setAttribute("id", data.results[item].id);
         divDate.textContent = data.results[item].release_date;
         if (divDate.textContent == "") {
             divDate.textContent = "Date Not Defined";
         }
         let divTxtTtl = document.createElement("div");
         divTxtTtl.setAttribute("class", "txtTitle");
+        divTxtTtl.setAttribute("id", data.results[item].id);
 
         let ovw = data.results[item].overview;
         if (ovw == "") {
@@ -308,6 +313,7 @@ function fillDataCardsTV(data, pageID) {
         sec.setAttribute("id", data.results[item].id);
         let divImg = document.createElement("div");
         divImg.setAttribute("class", "image");
+        divImg.setAttribute("id", data.results[item].id);
         let img = document.createElement("img");
         if (data.results[item].poster_path != null) {
             img.setAttribute("src", imageURL + "w185/" + data.results[item].poster_path);
@@ -317,17 +323,21 @@ function fillDataCardsTV(data, pageID) {
             img.setAttribute("src", "icon/png/noimage.png");
         }
         img.setAttribute("alt", data.results[item].title);
+        img.setAttribute("id", data.results[item].id);
         let divTtl = document.createElement("div");
         divTtl.setAttribute("class", "nameTitle");
+        divTtl.setAttribute("id", data.results[item].id);
         divTtl.textContent = data.results[item].name;
         let divDate = document.createElement("div");
         divDate.setAttribute("class", "date");
+        divDate.setAttribute("id", data.results[item].id);
         divDate.textContent = data.results[item].first_air_date;
         if (divDate.textContent == "") {
             divDate.textContent = "Date Not Defined";
         }
         let divTxtTtl = document.createElement("div");
         divTxtTtl.setAttribute("class", "txtTitle");
+        divTxtTtl.setAttribute("id", data.results[item].id);
 
         let ovw = data.results[item].overview;
         if (ovw == "") {
