@@ -16,7 +16,11 @@ let timeStaled = 3600000;
 let maxPos = 200;
 
 
-document.addEventListener("DOMContentLoaded", init);
+if (document.deviceready) {
+    document.addEventListener("deviceready", init);
+} else {
+    document.addEventListener("DOMContentLoaded", init);
+}
 
 function init() {
     addEventListeners();
