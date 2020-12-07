@@ -76,6 +76,7 @@ html {
     line-height: 1.5rem;
     color: hsl(135, 94%, 90%);
     background-color: hsla(150, 100%, 10%, 0.8);
+    box-shadow: 0 4px 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
 }
 
 .show,
