@@ -404,6 +404,11 @@ button:hover {
     justify-self: start;
 }
 
+.title:hover {
+  box-shadow: 4px 4px 14px rgb(80, 80, 80), -4px -4px 14px rgb(101, 101, 101);
+  transform: scale(1.1);  
+}
+
 .image {
     grid-area: im;
     justify-self: start;
