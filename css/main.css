@@ -402,7 +402,6 @@ button:hover {
     color: hsl(0, 0%, 100%);
     align-content: start;
     justify-self: start;
-    opacity: 1;
     transition: 0.5s;
     transition-timing-function: ease-in-out;
     transition-property: box-shadow;
