@@ -401,7 +401,7 @@ button:hover {
     color: hsl(0, 0%, 100%);
     align-content: start;
     justify-self: start;
-    transition: 0.5s;
+    transition: 0.3s;
     transition-timing-function: ease-in-out;
     transition-property: box-shadow;
     border-radius: 10px;
