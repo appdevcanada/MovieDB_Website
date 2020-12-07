@@ -501,7 +501,7 @@ footer {
 @media (min-width: 600px) and (max-width:999px) {
 
     main {
-        min-height: calc(100vh - 206px);
+        min-height: calc(100vh - 86px);
     }
 
     footer {
@@ -516,7 +516,7 @@ footer {
 @media (min-width: 1000px) and (max-width:1299px) {
 
     main {
-        min-height: calc(100vh - 206px);
+        min-height: calc(100vh - 86px);
     }
 
     footer {
@@ -531,7 +531,7 @@ footer {
 @media (min-width: 1300px) {
 
     main {
-        min-height: calc(100vh - 206px);
+        min-height: calc(100vh - 86px);
     }
 
     footer {
