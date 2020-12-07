@@ -405,6 +405,7 @@ button:hover {
     transition: 0.5s;
     transition-timing-function: ease-in-out;
     transition-property: box-shadow;
+    border-radius: 10px;
 }
 
 .title:hover {
@@ -415,6 +416,7 @@ button:hover {
     grid-area: im;
     justify-self: start;
     min-height: 278px;
+    padding: 5px;
 }
 
 .nameTitle {
@@ -423,7 +425,6 @@ button:hover {
     font-size: 1.2rem;
     font-weight: 500;
     color: hsl(142, 70%, 70%);
-    margin-right: 10px;
     font-family: 'Bree Serif', Times, 'Times New Roman', serif;
     min-height: 20px;
 }
@@ -431,7 +432,6 @@ button:hover {
 .date {
     grid-area: dt;
     align-self: start;
-    margin-right: 10px;
     max-height: 20px;
 }
 
