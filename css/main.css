@@ -477,7 +477,7 @@ footer {
 @media (max-width: 599px) {
 
     main {
-        min-height: calc(100vh - 206px);
+        min-height: calc(100vh - 86px);
     }
 
     footer {
