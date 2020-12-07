@@ -181,6 +181,7 @@ input.search {
     width: 100%;
     text-align: left;
     text-indent: 10px;
+    background-color: rgb(240 240 240 / 1);
 }
 
 input.search:focus {
@@ -329,17 +330,10 @@ input {
 }
 
 main {
+    background-color: rgb(240 240 240 / 1);
     min-height: 700px;
+    padding-top: 120px;
 }
-
-
-/*************************************************
-            HEADER
-*************************************************/
-header {
-    margin-top: 120px;
-}
-
 
 /*************************************************
             MAIN CONTENT
