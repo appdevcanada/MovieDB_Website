@@ -153,6 +153,7 @@ function getSearchResults() {
             return response.json();
         })
         .then(function (data) {
+            document.querySelector("#errormsg").textContent = "";
             if (data.results.length == 0) {
                 document.querySelector("#errormsg").textContent = "Sorry, no result for this search!";
                 return;
