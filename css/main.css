@@ -402,11 +402,14 @@ button:hover {
     color: hsl(0, 0%, 100%);
     align-content: start;
     justify-self: start;
+    opacity: 1;
+    transition: 0.5s;
+    transition-timing-function: ease-in-out;
+    transition-property: box-shadow;
 }
 
 .title:hover {
   box-shadow: 4px 4px 14px rgb(80, 80, 80), -4px -4px 14px rgb(101, 101, 101);
-  transform: scale(1.1);  
 }
 
 .image {
